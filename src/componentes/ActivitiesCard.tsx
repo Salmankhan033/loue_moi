@@ -1,9 +1,9 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import { useColor } from '../context';
-import { scaleHeight, scaleWidth } from '../utils';
+import {useColor} from '../context';
+import {scaleHeight, scaleWidth} from '../utils';
 
 interface ActivitiesCardProps {
   selected: boolean;
@@ -14,8 +14,12 @@ interface ActivitiesCardProps {
   onSelect: () => void;
 }
 
-const ActivitiesCard: React.FC<ActivitiesCardProps> = ({ selected, item, onSelect }) => {
-  const { appTheme } = useColor();
+const ActivitiesCard: React.FC<ActivitiesCardProps> = ({
+  selected,
+  item,
+  onSelect,
+}) => {
+  const {appTheme} = useColor();
   const styles = createStyles(appTheme, selected);
 
   return (
@@ -25,9 +29,17 @@ const ActivitiesCard: React.FC<ActivitiesCardProps> = ({ selected, item, onSelec
         <Text style={styles.activityText}>{item.activity}</Text>
       </View>
       {selected ? (
-        <Feather name="check-circle" color={appTheme.colors.FoundationRed} size={scaleWidth(14)} />
+        <Feather
+          name="check-circle"
+          color={appTheme.colors.FoundationRed}
+          size={scaleWidth(14)}
+        />
       ) : (
-        <Entypo name="circle" color={appTheme.colors.blueCheckbox} size={scaleWidth(14)} />
+        <Entypo
+          name="circle"
+          color={appTheme.colors.blueCheckbox}
+          size={scaleWidth(14)}
+        />
       )}
     </TouchableOpacity>
   );
@@ -43,7 +55,9 @@ const createStyles = (appTheme: any, selected: boolean) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: selected ? appTheme.colors.primary : appTheme.colors.grey600,
+      backgroundColor: selected
+        ? appTheme.colors.primary
+        : appTheme.colors.grey600,
       borderRadius: 76,
       paddingHorizontal: scaleWidth(15),
     },

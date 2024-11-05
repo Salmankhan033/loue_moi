@@ -15,6 +15,7 @@ const LightTheme = language => {
       blue10: '#33B1D9',
       gray1: '#EBEBF599',
       blue1: '#585979',
+      secondaryTransparent: '#555EDF40',
 
       //
       primaryRoyalBlue: '#070066',
@@ -54,6 +55,7 @@ const LightTheme = language => {
       mellowOrange: '#FF9F40',
       coralPink: '#FF6384',
       summerSky: '#36A2EB',
+      secondaryTransparent: '#555EDF40',
     },
     dimen: {
       btnHorizontal: 15,

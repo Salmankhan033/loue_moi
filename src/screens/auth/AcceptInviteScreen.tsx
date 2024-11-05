@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
 import ParentScreen from '../ParentScreen';
-import { useColor } from '../../context';
+import {useColor} from '../../context';
 import InviteHeader from '../../componentes/InviteHeader';
 import {scaleHeight, scaleWidth} from '../../utils';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -9,70 +9,92 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 
 const AcceptInviteScreen: React.FC = () => {
-  const { appTheme } = useColor();
+  const {appTheme} = useColor();
   const styles = createStyles(appTheme);
 
   return (
     <ParentScreen>
-      <View style={styles.container}>
-        <InviteHeader />
-        <View style={styles.profileContainer}>
-          <Image
-            source={{
-              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROQ-4Iue5GllXgqoVIbuStLOJ49ot8DFslQQ&s',
-            }}
-            style={styles.profileImage}
-          />
-          <View style={styles.profileInfo}>
-            <Text style={styles.profileName}>Eglantine - 12 km</Text>
-            <Text style={styles.profileAge}>84 ans</Text>
-            <View style={styles.statusContainer}>
-              <View style={styles.singleStatus}>
-                <Text style={styles.statusText}>Célibataire</Text>
-              </View>
-              <View style={styles.ratingContainer}>
-                <Text style={styles.ratingText}>4.8</Text>
-                <AntDesign name={'star'} size={scaleHeight(17)} color={appTheme.colors.FoundationRed} />
+      <ScrollView>
+        <View style={styles.container}>
+          <InviteHeader />
+          <View style={styles.profileContainer}>
+            <Image
+              source={{
+                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROQ-4Iue5GllXgqoVIbuStLOJ49ot8DFslQQ&s',
+              }}
+              style={styles.profileImage}
+            />
+            <View style={styles.profileInfo}>
+              <Text style={styles.profileName}>Eglantine - 12 km</Text>
+              <Text style={styles.profileAge}>84 ans</Text>
+              <View style={styles.statusContainer}>
+                <View style={styles.singleStatus}>
+                  <Text style={styles.statusText}>Célibataire</Text>
+                </View>
+                <View style={styles.ratingContainer}>
+                  <Text style={styles.ratingText}>4.8</Text>
+                  <AntDesign
+                    name={'star'}
+                    size={scaleHeight(17)}
+                    color={appTheme.colors.FoundationRed}
+                  />
+                </View>
               </View>
             </View>
           </View>
-        </View>
 
-        <Text style={styles.invitationText}>
-          Il vous propose de boire un verre mardi 23 au Brothers à 14h
-        </Text>
+          <Text style={styles.invitationText}>
+            Il vous propose de boire un verre mardi 23 au Brothers à 14h
+          </Text>
 
-        <View style={styles.statusListContainer}>
-          <View style={styles.statusRow}>
-            <Octicons name="verified" size={scaleHeight(20)} color={appTheme.colors.secondaryTextColor} />
-            <Text style={styles.statusRowText}>Invitation reçue</Text>
+          <View style={styles.statusListContainer}>
+            <View style={styles.statusRow}>
+              <Octicons
+                name="verified"
+                size={scaleHeight(20)}
+                color={appTheme.colors.secondaryTextColor}
+              />
+              <Text style={styles.statusRowText}>Invitation reçue</Text>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.statusRow}>
+              <Octicons
+                name="verified"
+                size={scaleHeight(20)}
+                color={appTheme.colors.secondaryTextColor}
+              />
+              <Text style={styles.statusRowText}>Vous avez accepté</Text>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.statusRow}>
+              <Octicons
+                name="verified"
+                size={scaleHeight(20)}
+                color={appTheme.colors.secondaryTextColor}
+              />
+              <Text style={styles.statusRowText}>John n'a pas validé</Text>
+            </View>
           </View>
-          <View style={styles.divider} />
-          <View style={styles.statusRow}>
-            <Octicons name="verified" size={scaleHeight(20)} color={appTheme.colors.secondaryTextColor} />
-            <Text style={styles.statusRowText}>Vous avez accepté</Text>
-          </View>
-          <View style={styles.divider} />
-          <View style={styles.statusRow}>
-            <Octicons name="verified" size={scaleHeight(20)} color={appTheme.colors.secondaryTextColor} />
-            <Text style={styles.statusRowText}>John n'a pas validé</Text>
-          </View>
-        </View>
 
-        <View style={styles.alertContainer}>
-          <Foundation name={'alert'} size={scaleHeight(20)} color={appTheme.colors.yellowComplimentary} />
-          <Text style={styles.alertText}>
-            Présentez votre QR code à John pour que votre cadeau soit pris en
-            compte.
+          <View style={styles.alertContainer}>
+            <Foundation
+              name={'alert'}
+              size={scaleHeight(20)}
+              color={appTheme.colors.yellowComplimentary}
+            />
+            <Text style={styles.alertText}>
+              Présentez votre QR code à John pour que votre cadeau soit pris en
+              compte.
+            </Text>
+          </View>
+
+          <Text style={styles.footerText}>
+            Vous pourrez rentrer en contact avec John 15 minutes avant le rendez
+            vous. Pour un rendez vous serein, pensez a être ponctuel.e et
+            agréable 😀
           </Text>
         </View>
-
-        <Text style={styles.footerText}>
-          Vous pourrez rentrer en contact avec John 15 minutes avant le rendez
-          vous. Pour un rendez vous serein, pensez a être ponctuel.e et agréable
-          😀
-        </Text>
-      </View>
+      </ScrollView>
     </ParentScreen>
   );
 };
@@ -95,7 +117,7 @@ const createStyles = (appTheme: any) =>
     },
     profileImage: {
       width: scaleWidth(80),
-      height: scaleHeight(80),
+      height: scaleWidth(80),
       resizeMode: 'cover',
       borderRadius: scaleHeight(100),
     },
@@ -120,7 +142,7 @@ const createStyles = (appTheme: any) =>
     },
     singleStatus: {
       width: scaleWidth(84),
-      height: scaleHeight(23),
+      height: scaleHeight(25),
       borderWidth: scaleWidth(1),
       borderColor: appTheme.colors.FoundationBlue1,
       borderRadius: scaleWidth(36),
@@ -141,7 +163,7 @@ const createStyles = (appTheme: any) =>
       color: appTheme.colors.textColor,
       fontSize: appTheme.dimen.textSize14,
       fontFamily: 'Nunito-Regular',
-      marginRight: scaleWidth(10),
+      marginRight: scaleWidth(5),
     },
     invitationText: {
       color: appTheme.colors.textColor,

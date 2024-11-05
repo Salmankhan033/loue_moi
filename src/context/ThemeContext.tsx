@@ -6,26 +6,26 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Appearance, useColorScheme } from 'react-native';
+import {Appearance, useColorScheme} from 'react-native';
 import PropTypes from 'prop-types';
-import { darkTheme } from '@src/utils/themes/DarkTheme';
-import LightTheme from '@src/utils/themes/LightTheme';
-import { useLanguage } from './LocalizationContext';
+import {darkTheme} from '@src/utils/themes/DarkTheme';
+import LightTheme from '../../src/utils/themes/LightTheme';
+import {useLanguage} from './LocalizationContext';
 export interface Theme {
   colors: {
     background: string;
-    textColor:string;
-    secondaryTextColor:string
+    textColor: string;
+    secondaryTextColor: string;
     primary: string;
-    foundationBlue:string;
-    FoundationRed:string;
-    FoundationBlue1:string;
-    red10:string;
-    blue10:string;
-    red20:string;
-    gray1:string;
-    blue1:string;
-    blueCheckbox:string;
+    foundationBlue: string;
+    FoundationRed: string;
+    FoundationBlue1: string;
+    red10: string;
+    blue10: string;
+    red20: string;
+    gray1: string;
+    blue1: string;
+    blueCheckbox: string;
     primary2: string;
     primaryRoyalBlue: string;
     primaryLight: string;
@@ -52,7 +52,6 @@ export interface Theme {
     pinkComplimentary: string;
     purpleComplimentary: string;
     burgandyComplimentary: string;
-  
     inputText: string;
     headerTitle: string;
     pureWhite: string;
@@ -94,11 +93,10 @@ export interface Theme {
     textSize9: number;
     textSize10: number;
     textSize18: number;
-    textSize28:number
-    textSize14:number
-    textSize38:number
-    textSize20: number
-
+    textSize28: number;
+    textSize14: number;
+    textSize38: number;
+    textSize20: number;
   };
   fonts: {
     regular: string;
@@ -137,9 +135,9 @@ export const useColor = () => {
   return context;
 };
 
-export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
+export const ThemeProvider = ({children}: React.PropsWithChildren) => {
   const colorScheme = useColorScheme();
-  const { language, isLanguageSelected } = useLanguage();
+  const {language, isLanguageSelected} = useLanguage();
   // const [appTheme, setTheme] = useState<Theme>(
   //   isDarkTheme(colorScheme) ? darkTheme : LightTheme(language), //for changin theme
   // );

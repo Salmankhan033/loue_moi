@@ -11,6 +11,7 @@ export enum Screen {
   Invite='Invite',
   Schedules='Schedules',
   AcceptInvite = 'Accept-Invite',
+  SplashScreen = 'SplashScreen',
 }
 
 export type NavStackParams = {
@@ -21,6 +22,7 @@ export type NavStackParams = {
   [Screen.Schedules]:undefined;
   [Screen.AcceptInvite]:undefined;
   [Screen.Invite] : undefined
+  [Screen.SplashScreen] : undefined
 
 };
 

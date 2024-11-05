@@ -54,8 +54,15 @@ const ActivitiesScreen: React.FC = () => {
       {...props}
       indicatorStyle={styles.indicator}
       style={styles.tabBar}
-      renderLabel={({route, focused}) => (
-        <Text style={styles.tabLabel}>{route.title}</Text>
+      renderLabel={({route, focused, index}) => (
+        <View>
+          <View style={styles.tabContainer}>
+            <Text style={styles.tabLabel}>{route.title}</Text>
+          </View>
+          <View>
+            <View style={styles.separator} />
+          </View>
+        </View>
       )}
       tabStyle={styles.tabStyle}
     />
@@ -106,7 +113,7 @@ const createStyles = (appTheme: any) =>
       marginTop: scaleHeight(30),
     },
     tabBar: {
-      backgroundColor: 'transparent',
+      backgroundColor: appTheme.colors.gray600,
       width: scaleWidth(345),
       alignSelf: 'center',
       borderRadius: scaleHeight(5),
@@ -116,22 +123,31 @@ const createStyles = (appTheme: any) =>
       elevation: 0,
     },
     tabStyle: {
-      width: scaleWidth(115), // Adjust tab width if needed
+      width: scaleWidth(113),
+    },
+    tabContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    separator: {
+      width: 1,
+      height: scaleHeight(12),
+      backgroundColor: appTheme.colors.grey100,
+      marginLeft: scaleWidth(-36),
+      marginTop: scaleWidth(-15),
     },
     indicator: {
       backgroundColor: appTheme.colors.grey100,
       width: scaleWidth(115),
-      height: '100%',
+      height: '90%',
       borderRadius: scaleHeight(10),
+      alignSelf: 'center',
     },
     tabLabel: {
-      color: appTheme.colors.textColor,
+      color: appTheme.colors.white,
       fontFamily: 'Nunito-SemiBold',
       fontSize: appTheme.dimen.textSize16,
       alignSelf: 'center',
-    },
-    tabLabelFocused: {
-      color: appTheme.colors.grey600, // Adjust to match the color of the selected tab text
     },
     buttonContainer: {
       alignSelf: 'center',

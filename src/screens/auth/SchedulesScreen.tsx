@@ -199,7 +199,6 @@ const createStyles = (appTheme: any) =>
       fontSize: appTheme.dimen.textSize14,
       fontFamily: 'Nunito-Regular',
     },
-
     ratingContainer: {
       flexDirection: 'row',
       alignItems: 'center',

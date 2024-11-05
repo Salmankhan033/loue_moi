@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import ParentScreen from '../ParentScreen';
 import {contents, useAppContext, useColor} from '../../context';
 import InviteHeader from '../../componentes/InviteHeader';
@@ -117,8 +118,23 @@ import Geolocation from 'react-native-geolocation-service';
 const InviteScreen: React.FC = () => {
   const {appTheme} = useColor();
   const [isChecked, setIsChecked] = useState(false);
-  const [searchLocation, setSearchLocation] = useState('');
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const onChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(false);
+    setDate(currentDate);
+  };
+
+  const onChangeTime = (event, selectedTime) => {
+    const currentTime = selectedTime || time;
+    setShowTimePicker(false);
+    setTime(currentTime);
+  };
   const [location, setLocation] = useState({
     latitude: 33.643915,
     longitude: 73.172782,
@@ -313,12 +329,32 @@ const InviteScreen: React.FC = () => {
             >
               {location && (
                 <Marker coordinate={location}>
-                  <Image
-                    source={{
-                      uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLBQAGacs4fThc3xP4vGWwGTnbOdO9l-4tCg&s',
-                    }}
-                    style={{width: 40, height: 40, borderRadius: 20}}
-                  />
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      // marginTop: scaleHeight(-4),
+                      // backgroundColor: 'red',
+                    }}>
+                    <Image
+                      source={require('../../assets/icons/markpin.png')}
+                      style={{
+                        width: scaleWidth(20),
+                        height: scaleWidth(20),
+                        borderRadius: scaleWidth(10),
+                        // marginTop: scaleHeight(-5),
+                      }}
+                    />
+                    <Image
+                      source={require('../../assets/icons/markpinttom.png')}
+                      style={{
+                        width: scaleWidth(8),
+                        height: scaleWidth(8),
+                        borderRadius: scaleWidth(4),
+                        marginTop: scaleHeight(-5),
+                      }}
+                    />
+                  </View>
                 </Marker>
               )}
             </MapView>
@@ -326,17 +362,46 @@ const InviteScreen: React.FC = () => {
               onPress={centerMapOnUser}
               style={styles.geoLocateButton}>
               <Text style={styles.geoLocateText}>Me géolocaliser</Text>
+              <Image source={require('../../assets/icons/marker-pin.png')} />
             </TouchableOpacity>
           </View>
 
           <Text style={styles.sectionTitle}>Choisir une date :</Text>
           <View style={styles.dateContainer}>
-            <View style={styles.dateBox}>
-              <Text style={styles.dateText}>12/12/2024</Text>
-            </View>
-            <View style={styles.dateBox2}>
-              <Text style={styles.dateText}>14:30</Text>
-            </View>
+            {/* Date Picker */}
+            <TouchableOpacity
+              onPress={() => setShowDatePicker(true)}
+              style={styles.dateBox}>
+              <Text style={styles.dateText}>{date.toLocaleDateString()}</Text>
+            </TouchableOpacity>
+            {showDatePicker && (
+              <DateTimePicker
+                value={date}
+                mode="date"
+                display="default"
+                onChange={onChangeDate}
+              />
+            )}
+
+            <TouchableOpacity
+              onPress={() => setShowTimePicker(true)}
+              style={styles.dateBox2}>
+              <Text style={styles.dateText}>
+                {time.toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: false,
+                })}
+              </Text>
+            </TouchableOpacity>
+            {showTimePicker && (
+              <DateTimePicker
+                value={time}
+                mode="time"
+                display="default"
+                onChange={onChangeTime}
+              />
+            )}
           </View>
 
           <View style={styles.agreementContainer}>
@@ -357,16 +422,15 @@ const InviteScreen: React.FC = () => {
               déplacement.
             </Text>
           </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              title={'Inviter '}
+              withIcon={true}
+              Icon={require('../../assets/icons/inviteButtonIcon.png')}
+              onPress={gotoNext}
+            />
+          </View>
         </ScrollView>
-
-        <View style={styles.buttonContainer}>
-          <PrimaryButton
-            title={'Inviter '}
-            withIcon={true}
-            Icon={require('../../assets/icons/inviteButtonIcon.png')}
-            onPress={gotoNext}
-          />
-        </View>
       </View>
     </ParentScreen>
   );
@@ -382,7 +446,7 @@ const createStyles = (appTheme: any) =>
       paddingHorizontal: scaleWidth(24),
     },
     scrollContainer: {
-      paddingBottom: scaleHeight(100),
+      paddingBottom: scaleHeight(20),
     },
     profileContainer: {
       backgroundColor: appTheme.colors.grey800,
@@ -505,7 +569,6 @@ const createStyles = (appTheme: any) =>
       borderRadius: scaleWidth(16),
       overflow: 'hidden',
       marginTop: scaleHeight(10),
-      backgroundColor: 'red',
     },
     map: {
       height: scaleHeight(287),
@@ -615,18 +678,23 @@ const createStyles = (appTheme: any) =>
       alignSelf: 'center',
       // position: 'absolute',
       // bottom: scaleHeight(16),
+      marginTop: scaleHeight(50),
     },
     geoLocateButton: {
       position: 'absolute',
       bottom: 20,
       alignSelf: 'center',
-      backgroundColor: '#D3CDFE',
+      backgroundColor: appTheme.colors.secondaryTransparent,
       paddingHorizontal: 20,
       paddingVertical: 10,
       borderRadius: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     geoLocateText: {
-      color: '#333',
+      color: appTheme.colors.secondaryTextColor,
       fontSize: 16,
+      paddingRight: scaleWidth(10),
     },
   });
